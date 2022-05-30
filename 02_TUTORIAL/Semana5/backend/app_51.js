@@ -19,10 +19,10 @@ db.get(sql, [], (err, row) => {
     if (err) {
     throw err;
     }
-    //res.write("<h1> Teste do banco de dados</h1>") 
-    //res.write("<h4> Informacoes do usuario cujo id = 1: </h2>") 
-    //res.write("title = " + row.title); 
-    //res.write("<br />completed = " + row.completed); 
+    res.write("<h1> Teste do banco de dados</h1>") 
+    res.write("<h4> Informacoes do usuario cujo id = 1: </h2>") 
+    res.write("title = " + row.title); 
+    res.write("<br />completed = " + row.completed); 
     res.json(row);
 });
 });
