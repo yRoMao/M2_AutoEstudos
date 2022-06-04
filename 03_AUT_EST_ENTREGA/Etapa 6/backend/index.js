@@ -12,7 +12,7 @@ app.use(express.static("../"));
 app.use(express.json());
 
 // Retorna todos registros (é o R do CRUD - Read)
-app.get('/user', (req, res) => {
+app.post('/user', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
   
@@ -28,11 +28,11 @@ app.get('/user', (req, res) => {
   });
   
 
-app.get('/insert', urlencodedParser, (req, res) => {
+app.post('/insert', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
   
-    sql = "INSERT INTO user (id, nome, idade) VALUES (?,?,?)"
+    sql = "INSERT INTO user (nome, idade) VALUES ('" + req.body.nome + "', " + req.body.idade + ")"
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.run(sql, [req.body.id, req.body.nome, req.body.idade],  err => {
         if (err) {
@@ -41,6 +41,38 @@ app.get('/insert', urlencodedParser, (req, res) => {
     });
     db.close(); // Fecha o banco
     res.end();
+});
+
+// Atualiza um registro (é o U do CRUD - Update)
+app.post('/userupdate', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	//res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "UPDATE user SET nome = '" + req.body.nome + "' WHERE id = " + req.body.id;
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); // Fecha o banco
+});
+
+// Exclui um registro (é o D do CRUD - Delete)
+app.post('/userdelete', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "DELETE FROM user WHERE id =" + req.body.id;
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); // Fecha o banco
 });
   
 app.listen(port, hostname, () => {
