@@ -46,7 +46,7 @@ app.post('/insert', urlencodedParser, (req, res) => {
 // Atualiza um registro (é o U do CRUD - Update)
 app.post('/userupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	//res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	sql = "UPDATE user SET nome = '" + req.body.nome + "' WHERE id = " + req.body.id;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
