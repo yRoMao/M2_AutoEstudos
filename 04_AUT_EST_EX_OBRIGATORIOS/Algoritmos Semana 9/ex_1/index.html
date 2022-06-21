@@ -1,0 +1,31 @@
+<head>
+    <!DOCTYPE html>
+    <meta charset="UTF-8">
+
+    <script>
+
+        function calculo(){
+            let n1 = document.getElementById("n1").value 
+            let array = n1.split('')
+                if (array[0] % 2 == 0){
+                    var number = ("par")
+                }
+                else {
+                    var number = ("ímpar")
+                }
+            document.getElementById('res').innerHTML=`A centena de ${array} é ${number} `
+        }
+
+    </script>
+
+
+</head>
+<body>
+<div align="center">
+    <h1>Insira 3 digitos:</h1>
+    <input type="number" id="n1" placeholder="000" pattern="[0-9]{3}">
+    <button onclick="calculo()">Calcular</button>
+    <label id='res'></label>
+</div>
+</body>
+</html>

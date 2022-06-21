@@ -1,0 +1,42 @@
+<head>
+    <!DOCTYPE html>
+    <meta charset="UTF-8">
+    
+    <script>
+
+        function calculo(){
+            let n1 = document.getElementById("n1").value 
+            let n2 = document.getElementById("n2").value 
+
+            for (let i = n1; i <= n2; i++) { 
+                let a = 0;
+                for (let j = 2; j < i; j++) {
+                    if (i % j == 0) {
+                        a += 1;
+                        break; 
+                    }
+                }
+                if (a == 0 && i > 1) {
+                    document.getElementById("res").innerHTML += i + ', ';
+                }
+            }
+        }       
+
+    </script>
+
+</head>
+
+<body>
+   
+<h1 align="center">Informe o intervalo entre 2 números: </h1>
+<div align="center">
+    Menor número:<input type="number" id="n1"> &nbsp;
+    Maior número:<input type="number" id="n2">
+</div>
+<div align="center">
+    <button align="center" onclick="calculo()">Calcular</button>
+</div>
+<div align="center">
+    <label id="res" >Os números primos são: </label>
+</div>
+</body>
